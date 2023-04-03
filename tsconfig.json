@@ -25,6 +25,6 @@
       "components/*": ["./src/components/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "examples/vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../src/Slider';
+import Slider from '@quangnv13/react-slider';
 type Props = {};
 
 export default function App({}: Props) {
