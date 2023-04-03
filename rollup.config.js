@@ -16,7 +16,7 @@ export default [
         sourcemap: 'inline',
       },
     ],
-    external: ['react', 'react-dom', '@quangnv13/react-slider'],
+    external: ['react', 'react-dom'],
     plugins: [
       resolve(),
       commonjs(),

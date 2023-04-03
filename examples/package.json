@@ -1,33 +1,22 @@
 {
-  "name": "@quangnv13/react-slider",
-  "version": "1.0.5",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "types": "dist/index.d.ts",
+  "name": "examples",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && tailwindcss -o dist/default.css && npm pack",
+    "dev": "vite",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
-  "peerDependencies": {
-    "react": "^17 || ^18",
-    "react-dom": "^17 || ^18"
+  "dependencies": {
+    "@quangnv13/react-slider": "file:../quangnv13-react-slider-1.0.5.tgz",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
-    "@commitlint/config-conventional": "^17.4.4",
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^11.0.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
+    "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
@@ -35,11 +24,10 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "husky": "^8.0.3",
+    "postcss": "^8.4.21",
     "prettier": "^2.8.4",
-    "rollup": "^3.20.2",
-    "rollup-plugin-dts": "^5.3.0",
     "tailwindcss": "^3.2.6",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
   }
 }
