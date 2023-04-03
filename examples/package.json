@@ -7,7 +7,7 @@
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
-    "@quangnv13/react-slider": "file:../quangnv13-react-slider-1.0.5.tgz",
+    "@quangnv13/react-slider": "file:..\\quangnv13-react-slider-1.0.5.tgz",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

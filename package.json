@@ -1,6 +1,9 @@
 {
   "name": "@quangnv13/react-slider",
-  "version": "1.0.5",
+  "version": "1.0.0",
+  "author": "quangnv13",
+  "description": "An accessible React slider component",
+  "keywords": ["react", "slider", "accessible"],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "type": "module",
@@ -9,6 +12,8 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
+    "initial": "pnpm build && pnpm install-deps-examples",
+    "install-deps-examples": "pnpm i --prefix examples",
     "build": "rollup -c --bundleConfigAsCjs && tailwindcss -o dist/default.css && npm pack",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
@@ -29,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^8.0.1",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",

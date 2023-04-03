@@ -22,31 +22,32 @@ export default function Slider(props: SliderProps) {
     if (props.value) {
       setValue(props.value);
     }
-  }, [value]);
+  }, [props.value]);
 
   function initSlider() {
     if (thumbButtonRef.current && trackRef.current) {
       const thumbWidth = thumbButtonRef.current.clientWidth;
       thumbButtonRef.current.style.left = `${-thumbWidth / 2}px`;
-      initDragThumb(
-        thumbButtonRef.current,
-        trackRef.current,
-        (value) => {
+      initDragThumb({
+        thumbELement: thumbButtonRef.current,
+        trackElement: trackRef.current,
+        valueChangeCallback: (value) => {
           setValue(value);
           if (props.onChange) {
             props.onChange(value);
           }
         },
-        props.min,
-        props.max,
+        min: props.min,
+        max: props.max,
         steps,
-      );
+        value,
+      });
     }
   }
 
   useEffect(() => {
     initSlider();
-  }, []);
+  }, [value]);
 
   useWindowSize(() => {
     initSlider();
@@ -56,7 +57,7 @@ export default function Slider(props: SliderProps) {
     <div className="w-full">
       <div
         ref={trackRef}
-        className="w-full relative"
+        className="w-full relative hover:cursor-pointer"
         style={{
           height: props.trackWidth || 2,
           backgroundColor: trackColor,
@@ -83,15 +84,6 @@ export default function Slider(props: SliderProps) {
                         left: `${stepLeftPos}%`,
                       }}
                     ></div>
-                    <div
-                      className={
-                        'absolute text-[#393939] text-xl font-bold -top-14 py-0.5 px-4 rounded-md -translate-x-1/2 ' +
-                        activeStepClass(stepValue === value)
-                      }
-                      style={{ left: `${stepLeftPos}%` }}
-                    >
-                      {stepValue}
-                    </div>
                     <div
                       className="absolute text-[#393939] text-xl font-bold top-8 -translate-x-1/2"
                       style={{ left: `${stepLeftPos}%` }}

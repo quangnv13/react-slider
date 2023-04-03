@@ -1,6 +1,7 @@
 function arrayFromNumber(num: number) {
   return Array.from(Array(num).keys());
 }
+
 export function calculatePercentageFromValue(value: number, max: number) {
   return (value / max) * 100;
 }
@@ -30,19 +31,41 @@ export function calculateStep(stepValue: number, max: number) {
   return [...originStepArray, max];
 }
 
-export function initDragThumb(
+function initThumbPosition(
   thumbELement: HTMLElement,
-  trackElement: HTMLDivElement,
-  valueChangeCallback: (value: number) => void,
-  min: number,
+  value: number,
   max: number,
-  steps: number[],
+  trackWidth: number,
 ) {
+  const thumbElementOffsetX =
+    (value / max) * trackWidth - thumbELement.clientWidth / 2;
+  thumbELement.style.left = `${thumbElementOffsetX}px`;
+}
+
+export function initDragThumb({
+  thumbELement,
+  trackElement,
+  valueChangeCallback,
+  min,
+  max,
+  steps,
+  value,
+}: {
+  thumbELement: HTMLElement;
+  trackElement: HTMLDivElement;
+  valueChangeCallback: (value: number) => void;
+  min: number;
+  max: number;
+  steps: number[];
+  value?: number;
+}) {
   let x1 = 0,
     x2 = 0;
   let currentStepValue = min;
   const halfStepValue = steps[1] / 2;
   const trackWidth = trackElement.offsetWidth;
+  const trackElementStartXPosition = trackElement.getBoundingClientRect().left;
+
   const stepPositionMap: { [key: number]: number } = steps.reduce(
     (acc, curr) => {
       return {
@@ -55,6 +78,11 @@ export function initDragThumb(
     },
     {},
   );
+
+  if (value) {
+    valueChangeCallback(value);
+    initThumbPosition(thumbELement, value, max, trackWidth);
+  }
 
   thumbELement.onmousedown = dragMouseDown;
 
@@ -129,6 +157,26 @@ export function initDragThumb(
       }
     }
   }
+
+  trackElement.onclick = (e: MouseEvent) => {
+    const clickOffsetX = e.clientX - trackElementStartXPosition;
+
+    const value = calculateValueFromPercentage(
+      (clickOffsetX / trackWidth) * 100,
+      max,
+    );
+    if (steps.length !== 0) {
+      const key =
+        steps.find(
+          (s) =>
+            s !== 0 &&
+            s - value >= -halfStepValue &&
+            s - value <= halfStepValue,
+        ) || 0;
+      thumbELement.style.left = `${stepPositionMap[key]}px`;
+      valueChangeCallback(key);
+    }
+  };
 
   function closeDragElement() {
     document.onmouseup = null;
